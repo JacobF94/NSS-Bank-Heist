@@ -18,5 +18,9 @@ namespace BankHeist
         {
             CourageFactor = courage;
         }
+        public void DisplayCriminal()
+        {
+            Console.WriteLine($"You have hired {Name} who has a skill level of {SkillLevel} and has a courage level of {CourageFactor}");
+        }
     }
 }
