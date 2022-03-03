@@ -12,7 +12,7 @@ namespace BankHeist
             bool Continue = true;
             while (Continue)
             {
-                Console.Write("Let's get started, name your new criminal hire: ");
+                Console.Write("Let's get started, name your new criminal hire (If you are done hiring, enter a blank name to stop): ");
                 string userNameInput = Console.ReadLine();
                 if (userNameInput == "")
                 {
