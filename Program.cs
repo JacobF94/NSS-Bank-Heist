@@ -9,6 +9,10 @@ namespace BankHeist
             Console.Write("Plan your heist!! What will your team name be: ");
             string TeamNameInput = Console.ReadLine();
             Roster MyTeam = new Roster(TeamNameInput);
+            Console.Write("Which bank will be your target: ");
+            string InputBankName = Console.ReadLine();
+            Bank TargetBank = new Bank(InputBankName);
+            TargetBank.DifficultyLevel = 100;
             bool Continue = true;
             while (Continue)
             {
@@ -32,6 +36,15 @@ namespace BankHeist
             Console.WriteLine("Fantastic, the team has been assembled!");
             MyTeam.DisplayNumber();
             MyTeam.DisplayTeam();
+            MyTeam.TeamTotalSkill();
+
+            if (MyTeam.TotalSkill > TargetBank.DifficultyLevel)
+            {
+                Console.WriteLine("Congratulations criminals, you have secured the bag");
+            } else
+            {
+                Console.WriteLine("Too bad, your whole team was arrested!");
+            }
         }
     }
 }

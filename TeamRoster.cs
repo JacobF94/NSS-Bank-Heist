@@ -7,6 +7,7 @@ namespace BankHeist
     {
         public string Name { get; set; }
         private List<Criminal> _EvilTeam = new List<Criminal>();
+        public int TotalSkill { get; set; }
         public Roster(string TeamName)
         {
             Name = TeamName;
@@ -24,7 +25,15 @@ namespace BankHeist
         }
         public void DisplayNumber()
         {
-            Console.WriteLine($"your team has {_EvilTeam.Count} memberes");
+            Console.WriteLine($"your team has {_EvilTeam.Count} members");
+        }
+        public void TeamTotalSkill()
+        {
+            foreach (Criminal member in _EvilTeam)
+            {
+                TotalSkill += member.SkillLevel;
+            }
+            Console.WriteLine($"Your team's total skill level is {TotalSkill}!");
         }
     }
 }
