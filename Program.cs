@@ -13,6 +13,9 @@ namespace BankHeist
             string InputBankName = Console.ReadLine();
             Bank TargetBank = new Bank(InputBankName);
             TargetBank.DifficultyLevel = 100;
+            Random r = new Random();
+            int LuckFactor = r.Next(-10, 10);
+            TargetBank.DifficultyLevel += LuckFactor;
             bool Continue = true;
             while (Continue)
             {
@@ -37,6 +40,7 @@ namespace BankHeist
             MyTeam.DisplayNumber();
             MyTeam.DisplayTeam();
             MyTeam.TeamTotalSkill();
+            Console.WriteLine($"{TargetBank.Name} has a difficulty rating of {TargetBank.DifficultyLevel}...");
 
             if (MyTeam.TotalSkill > TargetBank.DifficultyLevel)
             {
