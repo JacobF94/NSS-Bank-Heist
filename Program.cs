@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace BankHeist
 {
     class Program
@@ -12,10 +11,23 @@ namespace BankHeist
             Console.Write("Which bank will be your target: ");
             string InputBankName = Console.ReadLine();
             Bank TargetBank = new Bank(InputBankName);
-            TargetBank.DifficultyLevel = 100;
-            Random r = new Random();
-            int LuckFactor = r.Next(-10, 10);
-            TargetBank.DifficultyLevel += LuckFactor;
+            Console.Write("Select your difficulty, please type 'easy' 'medium' or 'hard': ");
+            string userDifficulty = Console.ReadLine().ToLower();
+            if (userDifficulty == "easy")
+            {
+                TargetBank.DifficultyLevel = 50;
+            } else if (userDifficulty == "medium")
+            {
+                TargetBank.DifficultyLevel = 100;
+            } else if (userDifficulty == "hard")
+            {
+                TargetBank.DifficultyLevel = 150;
+            } else
+            {
+                Console.WriteLine("Sorry, that was not a recognized response, defaulting to medium difficulty!");
+                TargetBank.DifficultyLevel = 100;
+            }
+
             bool Continue = true;
             while (Continue)
             {
@@ -40,14 +52,27 @@ namespace BankHeist
             MyTeam.DisplayNumber();
             MyTeam.DisplayTeam();
             MyTeam.TeamTotalSkill();
-            Console.WriteLine($"{TargetBank.Name} has a difficulty rating of {TargetBank.DifficultyLevel}...");
-
-            if (MyTeam.TotalSkill > TargetBank.DifficultyLevel)
+            Console.Write("How many times will your team attempt to rob the bank: ");
+            int userInputTries = int.Parse(Console.ReadLine());
+            int HowManyTries = 0;
+            for (int i = 0; i < userInputTries; i++)
             {
-                Console.WriteLine("Congratulations criminals, you have secured the bag");
-            } else
-            {
-                Console.WriteLine("Too bad, your whole team was arrested!");
+                Random r = new Random();
+                int LuckFactor = r.Next(-10, 10);
+                TargetBank.DifficultyLevel += LuckFactor;
+                Console.WriteLine($"{TargetBank.Name} has a difficulty rating of {TargetBank.DifficultyLevel}...");
+                if (MyTeam.TotalSkill > TargetBank.DifficultyLevel)
+                    {
+                        Console.WriteLine("Congratulations criminals, you have secured the bag");
+                        HowManyTries = HowManyTries + 1;
+                        Console.WriteLine($"It took your team {HowManyTries} attempts to rob the bank");
+                        break;
+                    } else
+                    {
+                        Console.WriteLine("Too bad, your whole team was arrested!");
+                        HowManyTries = HowManyTries + 1;
+                    }
+                TargetBank.DifficultyLevel = 100;
             }
         }
     }
